@@ -12,7 +12,7 @@ BOT_NAME = 'github_spider'
 SPIDER_MODULES = ['github_spider.spiders']
 NEWSPIDER_MODULE = 'github_spider.spiders'
 
-
+# replace these by your own account
 START_USER = 'xzhou29'
 USER = 'xzhou29'
 PASS = 'a05ca5f8b8d2c763ab87422f49a984f630faf13e'
