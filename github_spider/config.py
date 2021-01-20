@@ -1,4 +1,6 @@
 
+# max number of users to visit
+MAX_USERS = 5
 
 # type file that you want to extract and download
 # if empty, means all files
@@ -12,3 +14,6 @@ EXCLUDE_WORDS = []
 
 # output directory
 OUTPUT_DIR = 'output/'
+
+# API domain
+GITHUB_API_HOST = 'api.github.com'

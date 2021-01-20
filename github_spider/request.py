@@ -10,9 +10,6 @@ from github_spider.settings import (
     PASS
 )
 
-LOGGER = logging.getLogger(__name__)
-
-
 # def get_reponse(url):
 #     try:
 #         LOGGER.debug('get {}'.format(url))
@@ -27,14 +24,14 @@ LOGGER = logging.getLogger(__name__)
 
 def get_reponse(url):
     try:
-        LOGGER.debug('get {}'.format(url))
+        logging.debug('get {}'.format(url))
         response = requests.get(url, auth=(USER, PASS))
         if not response.ok:
-            LOGGER.info('get {} failed'.format(url))
+            logging.debug('get {} failed'.format(url))
         return response
     except Exception as exc:
-        LOGGER.error('get {} fail'.format(url))
-        LOGGER.exception(exc)
+        logging.error('get {} fail'.format(url))
+        logging.exception(exc)
 
 
 

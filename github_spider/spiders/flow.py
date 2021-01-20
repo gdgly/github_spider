@@ -1,6 +1,7 @@
 import github_spider.request as request
 import requests
 import sys
+import logging
 import github_spider.utils as utils
 from github_spider.config import (
     FILE_TYPE_FOR_EXTRACTION,
@@ -10,16 +11,13 @@ from github_spider.config import (
 )
 
 
-
 # check all repos for one user
 def download_files(repo_urls):
     for repo_url in repo_urls:
-        if 'StockTracker' in repo_url:
-            response = request.get_reponse(repo_url).json()
-            content_url = response.get('contents_url').split('{')[0]
-            print(' +++++++ content_url: ', content_url)
-            print(FILE_TYPE_FOR_EXTRACTION, INCLUDE_WORDS, EXCLUDE_WORDS)
-            extract_file(content_url)
+        logging.debug(' ++++++++++++ check repo_urls: {} '.format(repo_url))
+        response = request.get_reponse(repo_url).json()
+        content_url = response.get('contents_url').split('{')[0]
+        extract_file(content_url)
 
 
 # extract files for a project
@@ -28,19 +26,14 @@ def extract_file(content_url):
     for data in response:
         type = data.get('type')
         if type == 'file':
-            print(' ======== this is file =========')
             download_url = data.get('download_url')
             if not FILE_TYPE_FOR_EXTRACTION:
                 check_target(download_url)
-
             else:
                 suffix = '.' + download_url.split('.')[-1]
                 if suffix in FILE_TYPE_FOR_EXTRACTION:
-                    print(suffix, download_url)
                     check_target(download_url)
-
         elif type == 'dir':
-            # recursion
             extract_file(data.get('url'))
 
 
@@ -63,9 +56,9 @@ def check_target(download_url):
 def save_file(download_url, raw_text):
     filepath = download_url.split('.com')[-1]
     save_dir = OUTPUT_DIR + '/'.join(filepath.split('/')[:-1])
-    print(' +++++ save_dir : ', save_dir)
     utils.check_output_dir(save_dir)
     save_file = OUTPUT_DIR + filepath
+    logging.debug(' ++++++++++++ saved this file: {} '.format(save_file))
     f = open(save_file, 'w+')
     f.write(raw_text)
     f.close()

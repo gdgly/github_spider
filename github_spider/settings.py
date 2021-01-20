@@ -15,16 +15,8 @@ NEWSPIDER_MODULE = 'github_spider.spiders'
 # replace these by your own account
 START_USER = 'xzhou29'
 USER = 'xzhou29'
-PASS = 'a05ca5f8b8d2c763ab87422f49a984f630faf13e'
+PASS = '50a1fc5b63c53678418c2f83fd588fc40c891593'
 
-# PROXY_USE_COUNT = 100
-# REQUEST_RETRY_COUNT = 5
-# TIMEOUT = 10
-#
-# USER_CONSUMER_COUNT = 1
-# FOLLOWER_CONSUMER_COUNT = 1
-# FOLLOWING_CONSUMER_COUNT = 1
-# REPO_CONSUMER_COUNT = 1
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
