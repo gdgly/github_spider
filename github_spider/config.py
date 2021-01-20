@@ -2,8 +2,8 @@
 # max number of users to visit
 MAX_USERS = 5
 
-# type file that you want to extract and download
-# if empty, means all files
+# type of files that you want to extract and download
+# if empty, means all kinds of files
 FILE_TYPE_FOR_EXTRACTION = ['.py']
 
 # file must include these keywords
