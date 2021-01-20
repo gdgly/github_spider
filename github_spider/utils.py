@@ -2,7 +2,8 @@
 import os
 from github_spider.request import get_reponse
 from github_spider.config import (
-    GITHUB_API_HOST
+    GITHUB_API_HOST,
+    LANGUAGES
 )
 
 
@@ -37,8 +38,17 @@ def get_repos(repos_url):
     results = []
     response = get_reponse(repos_url).json()
     for data in response:
-        results.append(data.get('url'))
+        # data.get('languages_url'): to determine language distribution
+        if check_language_distribution(data.get('languages_url')):
+            results.append(data.get('url'))
     return results
+
+
+def check_language_distribution(languages_url):
+    userd_languages = get_reponse(languages_url).json()
+    if all(lang.lower() not in LANGUAGES for lang in userd_languages):
+        return False
+    return True
 
 
 def save_file(filename, content):

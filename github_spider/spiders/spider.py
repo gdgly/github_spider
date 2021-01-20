@@ -3,6 +3,7 @@ import logging
 from github_spider.settings import START_USER
 import github_spider.utils as utils
 import github_spider.spiders.flow as flow
+import sys
 from scrapy.exceptions import CloseSpider
 from github_spider.settings import (
     USER, PASS
@@ -51,9 +52,15 @@ class SpiderSpider(scrapy.Spider):
 
         logging.debug(' ++++++++++++ next_urls:  {} '.format(next_urls))
         repo_urls = utils.get_repos(data['repos_url'])
+        logging.debug(' ++++++++++++ repo_urls:  {} '.format(repo_urls))
         flow.download_files(repo_urls)
         # work END
-
+        # raise CloseSpider('reached MAX_USERS limit')
+        # sys.exit(0)
         for i, next_url in enumerate(next_urls):
-            yield response.follow(next_url, callback=self.parse)
+            try:
+                yield response.follow(next_url, callback=self.parse)
+            except Exception as exc:
+                logging.error(' +++ get failed: {}'.format(next_url))
+                logging.exception(exc)
 

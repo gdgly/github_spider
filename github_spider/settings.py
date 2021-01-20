@@ -15,7 +15,7 @@ NEWSPIDER_MODULE = 'github_spider.spiders'
 # replace these by your own account
 START_USER = 'xzhou29'
 USER = 'xzhou29'
-PASS = '50a1fc5b63c53678418c2f83fd588fc40c891593'
+PASS = ''
 
 
 
