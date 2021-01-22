@@ -7,16 +7,25 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+# DEFAULT SETTING: https://github.com/scrapy/scrapy/blob/master/scrapy/settings/default_settings.py
+
 BOT_NAME = 'github_spider'
 
 SPIDER_MODULES = ['github_spider.spiders']
 NEWSPIDER_MODULE = 'github_spider.spiders'
 
 # replace these by your own account
-START_USER = 'xzhou29'
+# START_USER = 'xzhou29'
+START_USER = "torvalds"
 USER = 'xzhou29'
 PASS = ''
 
+
+RETRY_ENABLED = True
+RETRY_TIMES = 2     # initial response + 2 retries = 3 requests
+RETRY_HTTP_CODES = [403]
+RETRY_PRIORITY_ADJUST = -1
+RETRY_WAIT = 5    # n seconds
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -56,9 +65,14 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'github_spider.middlewares.GithubSpiderDownloaderMiddleware': 543,
-#}
+
+DOWNLOADER_MIDDLEWARES = {
+    'github_spider.middlewares.GithubSpiderDownloaderMiddleware': 543,
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+    'github_spider.middlewares.SleepRetryMiddleware': 100,
+}
+
+
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html

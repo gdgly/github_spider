@@ -5,6 +5,7 @@ import logging
 import github_spider.utils as utils
 from github_spider.config import (
     FILE_TYPE_FOR_EXTRACTION,
+    ANY_WORDS,
     INCLUDE_WORDS,
     EXCLUDE_WORDS,
     OUTPUT_DIR
@@ -45,11 +46,16 @@ def check_target(download_url):
             return False
     if INCLUDE_WORDS:
         if all(keyword in raw_text for keyword in INCLUDE_WORDS):
-            save_file(download_url, raw_text)
-            return True
-    else:
-        save_file(download_url, raw_text)
-        return True
+            if ANY_WORDS:
+                if all(any_word not in raw_text for any_word in ANY_WORDS):
+                    return False
+        else:
+            return False
+    elif ANY_WORDS:
+        if all(any_word not in raw_text for any_word in ANY_WORDS):
+            return False
+    save_file(download_url, raw_text)
+    return True
 
 
 # save into local machine

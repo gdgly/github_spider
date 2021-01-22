@@ -10,17 +10,6 @@ from github_spider.settings import (
     PASS
 )
 
-# def get_reponse(url):
-#     try:
-#         LOGGER.debug('get {}'.format(url))
-#         response = requests.get(url)
-#         if not response.ok:
-#             LOGGER.info('get {} failed'.format(url))
-#         return response
-#     except Exception as exc:
-#         LOGGER.error('get {} fail'.format(url))
-#         LOGGER.exception(exc)
-
 
 def get_reponse(url):
     try:

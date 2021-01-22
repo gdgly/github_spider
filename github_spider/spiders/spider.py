@@ -61,6 +61,6 @@ class SpiderSpider(scrapy.Spider):
             try:
                 yield response.follow(next_url, callback=self.parse)
             except Exception as exc:
-                logging.error(' +++ get failed: {}'.format(next_url))
+                logging.error(' ++++++++++++ get failed: {}'.format(next_url))
                 logging.exception(exc)
 
