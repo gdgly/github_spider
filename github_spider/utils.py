@@ -13,8 +13,14 @@ def check_output_dir(dir):
 
 
 def gen_user_page_url(user_name):
-    # get user github url
-    return 'https://{}/users/{}'.format(GITHUB_API_HOST, user_name)
+    if type(user_name) == list:
+        users = []
+        for user in user_name:
+            users.append('https://{}/users/{}'.format(GITHUB_API_HOST, user))
+        return users
+    else:
+        # get user github url
+        return 'https://{}/users/{}'.format(GITHUB_API_HOST, user_name)
 
 
 def gen_user_follwer_urls(followers_url):

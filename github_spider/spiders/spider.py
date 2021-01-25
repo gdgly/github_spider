@@ -22,6 +22,9 @@ class SpiderSpider(scrapy.Spider):
     http_pass = PASS
     utils.check_output_dir(OUTPUT_DIR)
     user_url = utils.gen_user_page_url(START_USER)
+    # if type(user_url) == list:
+    #     start_urls = user_url
+    # else:
     start_urls = [user_url]
 
     def parse(self, response):

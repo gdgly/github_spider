@@ -16,7 +16,9 @@ NEWSPIDER_MODULE = 'github_spider.spiders'
 
 # replace these by your own account
 # START_USER = 'xzhou29'
-START_USER = "torvalds"
+# "FlaxEngine" "SerenityOS" "raspberrypi" "jerryscript-project" "pingcap" "pimoroni"
+# START_USER = ["FlaxEngine", "SerenityOS", "raspberrypi", "jerryscript-project", "pingcap", "pimoroni"]#"apache" # "ocornut" #"torvalds"
+START_USER = "pimoroni"
 USER = 'xzhou29'
 PASS = ''
 
